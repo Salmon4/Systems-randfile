@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <errno.h>
+#include <string.h>
 
 int randNum(){
   int file = open("/dev/random", O_RDONLY);
   int ans = 0;
   int *buff = &ans;
   if (file == -1){
-    printf("Something's wronnnggggg :(((((");
+    printf("error: %s\n", strerror(errno));
   }
   else{
     int readBytes = read(file,buff,sizeof(int));
@@ -31,14 +33,30 @@ int main(){
 
   printf("Writing numbers to file...\n");
   int file = open("output.txt", O_WRONLY | O_CREAT);
+  if (file == -1){
+    printf("error: %s\n", strerror(errno));
+    printf("Fix error to contine.\n");
+  }
   int writtenBytes = write(file,arr,sizeof(arr));
+  if (writtenBytes == -1){
+    printf("error: %s\n", strerror(errno));
+    printf("Fix error to contine.\n");
+  }
   close(file);
   printf("\n");
 
   printf("Reading numbers from file...\n");
   int arr2[10];
   file = open("output.txt", O_RDONLY);
+  if (file == -1){
+    printf("error: %s\n", strerror(errno));
+    printf("Fix error to contine.\n");
+  }
   int readBytes = read(file,arr2,writtenBytes);
+  if (readBytes == -1){
+    printf("error: %s\n", strerror(errno));
+    printf("Fix error to contine.\n");
+  }
   printf("\n");
 
   printf("Verification that written values were the same:\n");
