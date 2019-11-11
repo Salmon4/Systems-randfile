@@ -27,19 +27,25 @@ int main(){
   for (i = 0; i < 10; i++){
     printf("random %d: %d\n", i, arr[i]);
   }
+  printf("\n");
 
   printf("Writing numbers to file...\n");
-  int file = open("otuput.txt", O_RDWR);
-  write(file,arr,sizeof(arr));
+  int file = open("output.txt", O_WRONLY | O_CREAT);
+  int writtenBytes = write(file,arr,sizeof(arr));
+  close(file);
+  printf("\n");
 
   printf("Reading numbers from file...\n");
   int arr2[10];
-  int readBytes = read(file,arr2,sizeof(arr));
+  file = open("output.txt", O_RDONLY);
+  int readBytes = read(file,arr2,writtenBytes);
+  printf("\n");
 
-  printf("Veritification that written values were the same:\n");
+  printf("Verification that written values were the same:\n");
   for (i = 0; i < 10; i++){
     printf("random %d: %d\n", i, arr2[i]);
   }
+  close(file);
 
   return 1;
 }
