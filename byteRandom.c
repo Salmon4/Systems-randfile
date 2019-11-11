@@ -23,8 +23,12 @@ int main(){
   for (i = 0; i < 10; i++){
     arr[i] = randNum();
   }
+  printf("Generating random numbers:\n");
   for (i = 0; i < 10; i++){
-    printf("%d ", arr[i]);
+    printf("random %d: %d\n", i, arr[i]);
   }
+  printf("Writing numbers to file...\n");
+  int file = open("otuput.txt", O_RDWR);
+  write(file,arr,sizeof(arr));
   return 1;
 }
