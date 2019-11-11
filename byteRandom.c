@@ -18,5 +18,13 @@ int randNum(){
 }
 
 int main(){
+  int arr[10];
+  int i;
+  for (i = 0; i < 10; i++){
+    arr[i] = randNum();
+  }
+  for (i = 0; i < 10; i++){
+    printf("%d ", arr[i]);
+  }
   return 1;
 }
