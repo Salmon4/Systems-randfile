@@ -27,8 +27,15 @@ int main(){
   for (i = 0; i < 10; i++){
     printf("random %d: %d\n", i, arr[i]);
   }
+
   printf("Writing numbers to file...\n");
   int file = open("otuput.txt", O_RDWR);
   write(file,arr,sizeof(arr));
+
+  printf("Reading numbers from file...\n");
+  int arr2[10];
+  int readBytes = read(file,arr2,sizeof(arr));
+  
+
   return 1;
 }
