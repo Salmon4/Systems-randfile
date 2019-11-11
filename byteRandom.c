@@ -35,7 +35,11 @@ int main(){
   printf("Reading numbers from file...\n");
   int arr2[10];
   int readBytes = read(file,arr2,sizeof(arr));
-  
+
+  printf("Veritification that written values were the same:\n");
+  for (i = 0; i < 10; i++){
+    printf("random %d: %d\n", i, arr2[i]);
+  }
 
   return 1;
 }
